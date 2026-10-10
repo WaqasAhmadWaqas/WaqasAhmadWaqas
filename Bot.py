@@ -2,19 +2,16 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import os
 import json
-import random
 import datetime
-import requests
 
 # ========== یہاں اپنی معلومات ڈالیں ==========
-TOKEN = "TOKEN = "8936754443:AAFbFf6m0h36HfpIAfA4CIG7a6X16_wSi5M"
+TOKEN = "8936754443:AAFbFf6m0h36HfpIAfA4CIG7a6X16_wSi5M"
 ADSTERRA_SMARTLINK = "https://uplcm.com/4/11995331"
-ADMIN_ID = 6277866627  # یہاں اپنی Telegram ID ڈالیں
+ADMIN_ID = 6277866627
 # ==============================================
 
 bot = telebot.TeleBot(TOKEN)
 
-# ڈیٹا فائل (پوائنٹس محفوظ کرنے کے لیے)
 DATA_FILE = "users_data.json"
 
 def load_data():
@@ -57,7 +54,6 @@ def add_points(user_id, points):
     data[uid]["ads_watched"] += 1
     save_data(data)
 
-# ========== مینو ==========
 def main_menu(user_id):
     markup = InlineKeyboardMarkup(row_width=2)
     markup.add(
@@ -68,16 +64,14 @@ def main_menu(user_id):
     )
     return markup
 
-# ========== /start کمانڈ ==========
 @bot.message_handler(commands=['start'])
 def start(message):
     user_id = message.chat.id
     args = message.text.split()
     referred_by = args[1] if len(args) > 1 else None
     
-    get_user(user_id)  # یوزر رجسٹر کریں
+    get_user(user_id)
     
-    # ریفرل پوائنٹس
     if referred_by and referred_by != str(user_id):
         add_points(referred_by, 5)
         try:
@@ -92,7 +86,6 @@ def start(message):
         reply_markup=main_menu(user_id)
     )
 
-# ========== ایڈ دیکھنے کا بٹن ==========
 @bot.callback_query_handler(func=lambda call: call.data == "watch_ad")
 def watch_ad(call):
     user_id = call.message.chat.id
@@ -118,7 +111,6 @@ def watch_ad(call):
     )
     bot.answer_callback_query(call.id)
 
-# ========== ایڈ مکمل ہونے کا بٹن ==========
 @bot.callback_query_handler(func=lambda call: call.data == "ad_done")
 def ad_done(call):
     user_id = call.message.chat.id
@@ -134,21 +126,17 @@ def ad_done(call):
     bot.answer_callback_query(call.id, "✅ آپ کو 1 پوائنٹ ملا!", show_alert=True)
     bot.send_message(user_id, "🎉 شاباش! آپ کو 1 پوائنٹ ملا۔", reply_markup=main_menu(user_id))
 
-# ========== بیلنس ==========
 @bot.callback_query_handler(func=lambda call: call.data == "balance")
 def balance(call):
     user_id = call.message.chat.id
     user = get_user(user_id)
     bot.send_message(
         user_id,
-        f"💰 آپ کا بیلنس:\n\n"
-        f"پوائنٹس: {user['points']}\n"
-        f"کل ایڈ دیکھے: {user['ads_watched']}",
+        f"💰 آپ کا بیلنس:\n\nپوائنٹس: {user['points']}\nکل ایڈ دیکھے: {user['ads_watched']}",
         reply_markup=main_menu(user_id)
     )
     bot.answer_callback_query(call.id)
 
-# ========== ریفرل ==========
 @bot.callback_query_handler(func=lambda call: call.data == "referral")
 def referral(call):
     user_id = call.message.chat.id
@@ -156,27 +144,21 @@ def referral(call):
     link = f"https://t.me/{bot_username}?start={user_id}"
     bot.send_message(
         user_id,
-        f"🤝 آپ کا ریفرل لنک:\n\n{link}\n\n"
-        f"ہر ریفرل پر آپ کو 5 پوائنٹس ملیں گے۔",
+        f"🤝 آپ کا ریفرل لنک:\n\n{link}\n\nہر ریفرل پر آپ کو 5 پوائنٹس ملیں گے۔",
         reply_markup=main_menu(user_id)
     )
     bot.answer_callback_query(call.id)
 
-# ========== اعداد و شمار ==========
 @bot.callback_query_handler(func=lambda call: call.data == "stats")
 def stats(call):
     user_id = call.message.chat.id
     user = get_user(user_id)
     bot.send_message(
         user_id,
-        f"📊 آپ کے اعداد و شمار:\n\n"
-        f"پوائنٹس: {user['points']}\n"
-        f"کل ایڈ: {user['ads_watched']}\n"
-        f"آج کے ایڈ: {user['ads_today']}",
+        f"📊 آپ کے اعداد و شمار:\n\nپوائنٹس: {user['points']}\nکل ایڈ: {user['ads_watched']}\nآج کے ایڈ: {user['ads_today']}",
         reply_markup=main_menu(user_id)
     )
     bot.answer_callback_query(call.id)
 
-# ========== بوٹ چلائیں ==========
 print("بوٹ چل رہا ہے...")
 bot.infinity_polling()
