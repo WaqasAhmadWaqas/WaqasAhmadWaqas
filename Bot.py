@@ -8,7 +8,7 @@ import requests
 
 # ========== یہاں اپنی معلومات ڈالیں ==========
 TOKEN = "YAHAN_APNA_TELEGRAM_TOKEN_DALEIN"
-ADSTERRA_SMARTLINK = "YAHAN_APNA_ADSTERRA_SMARTLINK_DALEIN"
+ADSTERRA_SMARTLINK = "ADSTERRA_SMARTLINK = "https://uplcm.com/4/11995331"
 ADMIN_ID = 6277866627  # یہاں اپنی Telegram ID ڈالیں
 # ==============================================
 
