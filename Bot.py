@@ -5,9 +5,9 @@ import json
 import datetime
 
 # ========== یہاں اپنی معلومات ڈالیں ==========
-TOKEN = "8936754443:AAFbFf6m0h36HfpIAfA4CIG7a6X16_wSi5M"
+TOKEN = "8936754443:AAHya67EmRo71dhEVK1QUz73F-qpShy8tmo"
 ADSTERRA_SMARTLINK = "https://uplcm.com/4/11995331"
-ADMIN_ID = 6277866627
+ADMIN_ID = 6850142516
 # ==============================================
 
 bot = telebot.TeleBot(TOKEN)
