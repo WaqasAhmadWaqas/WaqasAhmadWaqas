@@ -17,7 +17,7 @@ DATA_FILE = "users_data.json"
 # ========== Settings (CPM ke hisaab se) ==========
 POINT_VALUE = 0.001          # 1 point = $0.001 (yani 1000 points = $1)
 MIN_WITHDRAW_DOLLARS = 1     # Minimum $1 withdrawal
-MIN_REFERRALS = 20           # 20 referrals zaroori
+MIN_REFERRALS = 10           # 10 referrals zaroori
 # ==============================================
 
 def load_data():
