@@ -5,7 +5,7 @@ import json
 import datetime
 
 # ========== SETTINGS ==========
-TOKEN = "8916537757:AAE2F9rLCY4ckiClcX-OQNFEFP1S3dUZ1mI"
+TOKEN = "8936754443:AAGRPMU2nQyVlddYk_amqen1lEYqFlUagKk"
 ADSTERRA_SMARTLINK = "https://uplcm.com/4/11995331"
 ADMIN_ID = 6850142516
 
